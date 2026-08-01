@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>FilterByExample.Tests</AssemblyName>
+    <RootNamespace>FilterByExample.Tests</RootNamespace>
+    <Deterministic>true</Deterministic>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="..\Source\Domain\ExampleFilterOperation.cs"
+             Link="ExampleFilterOperation.cs" />
+    <Compile Include="..\Source\Domain\IExampleFilterTarget.cs"
+             Link="IExampleFilterTarget.cs" />
+    <Compile Include="..\Source\Domain\FilterMutationResult.cs"
+             Link="FilterMutationResult.cs" />
+    <Compile Include="..\Source\Domain\FilterByExampleService.cs"
+             Link="FilterByExampleService.cs" />
+  </ItemGroup>
+</Project>

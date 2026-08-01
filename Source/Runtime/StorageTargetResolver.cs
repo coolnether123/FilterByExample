@@ -1,0 +1,118 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using FilterByExample.Domain;
+using RimWorld;
+using Verse;
+
+namespace FilterByExample.Runtime
+{
+    internal static class StorageTargetResolver
+    {
+        internal static List<StorageFilterTarget> Resolve(
+            IntVec3 cell,
+            Map map)
+        {
+            var targets = new List<StorageFilterTarget>();
+            var seenSettings = new HashSet<StorageSettings>();
+            if (map == null || !cell.InBounds(map))
+            {
+                return targets;
+            }
+
+            List<Thing> things = map.thingGrid.ThingsListAtFast(cell);
+            for (int index = 0; index < things.Count; index++)
+            {
+                Thing thing = things[index];
+                if (!thing.Spawned ||
+                    thing is Blueprint ||
+                    thing is Frame ||
+                    thing.Faction != null && thing.Faction != Faction.OfPlayer)
+                {
+                    continue;
+                }
+
+                AddParent(
+                    thing as IStoreSettingsParent,
+                    LabelFor(thing),
+                    targets,
+                    seenSettings);
+
+                if (thing is ThingWithComps thingWithComps)
+                {
+                    List<ThingComp> comps = thingWithComps.AllComps;
+                    for (int compIndex = 0;
+                        compIndex < comps.Count;
+                        compIndex++)
+                    {
+                        AddParent(
+                            comps[compIndex] as IStoreSettingsParent,
+                            LabelFor(thing),
+                            targets,
+                            seenSettings);
+                    }
+                }
+            }
+
+            Zone zone = map.zoneManager.ZoneAt(cell);
+            AddParent(
+                zone as IStoreSettingsParent,
+                zone?.label,
+                targets,
+                seenSettings);
+
+            return targets
+                .OrderBy(target => target.Label, StringComparer.Ordinal)
+                .ToList();
+        }
+
+        private static void AddParent(
+            IStoreSettingsParent parent,
+            string label,
+            ICollection<StorageFilterTarget> targets,
+            ISet<StorageSettings> seenSettings)
+        {
+            if (parent == null)
+            {
+                return;
+            }
+
+            try
+            {
+                if (!parent.StorageTabVisible)
+                {
+                    return;
+                }
+
+                StorageSettings settings = parent.GetStoreSettings();
+                if (settings?.filter == null || !seenSettings.Add(settings))
+                {
+                    return;
+                }
+
+                targets.Add(new StorageFilterTarget(
+                    settings,
+                    parent.GetParentStoreSettings(),
+                    label));
+            }
+            catch (Exception exception)
+            {
+                Log.WarningOnce(
+                    "[Filter by Example] Ignored incompatible storage target " +
+                    (label ?? "<unnamed>") + ": " + exception.Message,
+                    (parent.GetType().FullName ?? string.Empty).GetHashCode());
+            }
+        }
+
+        private static string LabelFor(Thing thing)
+        {
+            if (thing is IStorageGroupMember member && member.Group != null)
+            {
+                return member.Group.RenamableLabel.CapitalizeFirst() +
+                    " (" + thing.LabelShortCap + ")";
+            }
+
+            return thing.LabelShortCap;
+        }
+    }
+}

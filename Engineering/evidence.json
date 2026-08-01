@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "packageId": "CoolNether123.FilterByExample",
+  "rimWorldVersion": "1.6",
+  "profilerMode": "absent",
+  "releasePackage": {
+    "resultCode": "RWT-BUILD-RELEASE-PACKAGE-VALID",
+    "includedPaths": [
+      "About",
+      "1.6/Assemblies/FilterByExample.dll",
+      "Languages",
+      "LICENSE"
+    ],
+    "fileCount": 5,
+    "previewSha256": "CCFC5ECFFA241D0033ACDF1E6B65FA7FF77B569161A2F0D10D3BC2A3A4D47497",
+    "modAssemblySha256": "497C4BEC1F955479E582BE94F7579C1DF198780FE80D7F79918755C6ABB80686",
+    "licenseSha256": "7942115C67A258A6F955EF971F48E7A04C8A1CDCEC8F862CED392F93DA44F05A"
+  },
+  "screenshots": [
+    "Engineering/screenshots/selected-steel.png",
+    "Engineering/screenshots/targeting-storage.png",
+    "Engineering/screenshots/disallow-result.png",
+    "Engineering/screenshots/shelf-filter.png",
+    "Engineering/screenshots/rightmost-gizmos.png"
+  ],
+  "provenance": {
+    "gameBuild": "1.6.4871 rev573",
+    "versionManifestSha256": "0174C74429A3B1D9B272002A055FDBBC6645A0BF24A085E8BF39FDD3407B505B",
+    "gameAssemblySha256": "4A170804FBFEFABDB620D8914E584E58F822A58C6E304DCB76A67003588DAB28",
+    "sourceCommit": null,
+    "sourceState": "greenfield-pre-initial-commit",
+    "modAssemblySha256": "497C4BEC1F955479E582BE94F7579C1DF198780FE80D7F79918755C6ABB80686",
+    "activeMods": [
+      "Ludeon.RimWorld",
+      "brrainz.harmony",
+      "Coolnether123.RimWorldAgent",
+      "CoolNether123.Spine",
+      "CoolNether123.FilterByExample"
+    ],
+    "laneEvidenceId": "FilterByExample-94376196be95443b9bd09b8b2b742e9b",
+    "logSha256": "80DE3D0DA395E6110428731F3F6E5B7AFC25127942783FB49BB5D1C548CE6177",
+    "cleanShutdown": true,
+    "forcedTermination": false
+  }
+}
