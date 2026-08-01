@@ -27,8 +27,8 @@
     "gameBuild": "1.6.4871 rev573",
     "versionManifestSha256": "0174C74429A3B1D9B272002A055FDBBC6645A0BF24A085E8BF39FDD3407B505B",
     "gameAssemblySha256": "4A170804FBFEFABDB620D8914E584E58F822A58C6E304DCB76A67003588DAB28",
-    "sourceCommit": null,
-    "sourceState": "greenfield-pre-initial-commit",
+    "sourceCommit": "88f0e1cc53610740f28699dddcf853995f5ad36c",
+    "sourceState": "implementation committed; evidence recorded separately",
     "modAssemblySha256": "497C4BEC1F955479E582BE94F7579C1DF198780FE80D7F79918755C6ABB80686",
     "activeMods": [
       "Ludeon.RimWorld",
