@@ -2,11 +2,22 @@
 
 ## Data flow
 
-`Thing.GetGizmos` contributes one allow command and one disallow command for the
-first eligible selected item. The presentation layer collects and deduplicates
-the selected items' `ThingDef` values. RimWorld targeting then resolves storage
-at the clicked cell. When more than one independently actionable filter is
-present, a short `FloatMenu` makes the choice explicit.
+`Thing.GetGizmos` contributes one allow designator and one disallow designator
+for the first eligible selected item. The presentation layer collects and
+deduplicates the selected items' `ThingDef` values. RimWorld's own filled-
+rectangle designator owns click capture, drag boundaries, and release. The mod
+resolves storage only inside that boundary, highlights cells containing filters
+that will change, deduplicates shared settings, and applies the release as one
+batch. A one-cell overlap still opens a short `FloatMenu` rather than guessing.
+
+An empty selection no larger than five by five cells keeps the selected
+designator active for an immediate retry. A successful operation and a larger
+empty selection end the tool normally.
+
+Each designator receives its own `KeyBindingDef` through `Command.hotKey`.
+RimWorld therefore owns rebinding, key labels, event handling, and conflict
+presentation. Both defaults are `None`; the mod does not poll input or reserve
+a key that already belongs to vanilla.
 
 `StorageTargetResolver` locates zones, things, and thing comps implementing
 `IStoreSettingsParent`. It resolves their actual `StorageSettings`, drops
@@ -41,20 +52,18 @@ normal immediate storage refresh and save persistence.
   not prevent a disallow operation.
 - A modded `IStoreSettingsParent` that throws is skipped with one warning per
   parent type, avoiding repeated hover-time log spam.
-- A no-op is not presented as a valid targeting cell and never triggers a
-  settings callback.
+- A no-op is not highlighted and never triggers a settings callback.
 
 ## Intentional one-caller helpers
 
 The production one-caller helpers are `ModBootstrap.InstallPatches`,
 `ThingGizmoPatch.AppendCommands`, `ExampleSelectionCommands.SelectedDefinitions`,
-`ExampleSelectionCommands.IsActionable`,
-`ExampleSelectionCommands.ChooseAndApply`, and
-`FilterByExampleService.NeedsChange`. They isolate, respectively, idempotent
-bootstrap, lazy enumerable composition, selection ownership, target validation,
-ambiguity resolution, and the operation predicate. Promoting them to public
-services or merging them into callers would either expose implementation detail
-or obscure the layer boundary, so no further abstraction is recommended. If a
-second presentation surface is added, selection/target-validation helpers
-should then move behind a presentation-facing interface instead of being
-copied.
+and `EmptyDragRetryPolicy.KeepActive`.
+They isolate, respectively, idempotent bootstrap, lazy enumerable composition,
+selection ownership, and the tested retry boundary.
+`EmptyDragRetryPolicy` currently has one production caller; keeping it internal
+is recommended because it creates a game-independent test seam for the exact
+five-cell behavior. Promoting any of these helpers to a public service would
+expose implementation detail. If a second presentation surface is added,
+selection resolution should then move behind a presentation-facing interface
+instead of being copied.

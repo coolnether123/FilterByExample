@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <KeyBindingDef ParentName="SelectionSpecialKeyBinding">
+    <defName>FilterByExample_Allow</defName>
+    <label>Filter by Example: allow</label>
+    <defaultKeyCodeA>None</defaultKeyCodeA>
+    <defaultKeyCodeB>None</defaultKeyCodeB>
+  </KeyBindingDef>
+  <KeyBindingDef ParentName="SelectionSpecialKeyBinding">
+    <defName>FilterByExample_Disallow</defName>
+    <label>Filter by Example: disallow</label>
+    <defaultKeyCodeA>None</defaultKeyCodeA>
+    <defaultKeyCodeB>None</defaultKeyCodeB>
+  </KeyBindingDef>
+</Defs>

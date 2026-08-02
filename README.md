@@ -8,7 +8,19 @@ storage-filter changes from items already on the map.
 1. Select one item, or multi-select several item stacks.
 2. Choose **Allow by example** or **Disallow by example** on the selected
    item's command bar.
-3. Click a stockpile, shelf, or storage building.
+3. Click one storage target, or drag across several storage targets.
+
+While dragging, RimWorld draws the selection boundary and the mod highlights
+only storage filters that will actually change. Release to update every
+highlighted target once. It deliberately omits RimWorld's area-cell number;
+the affected highlights are the confirmation. A small empty click or drag up
+to five cells wide and tall keeps the tool active so a near miss can be retried
+without choosing the command again.
+
+Both actions have their own entries in RimWorld's normal Controls menu. They
+start unbound because RimWorld already occupies every convenient nearby letter;
+assign whichever keys fit your layout. The selected bindings appear on the
+command gizmos and use RimWorld's ordinary hotkey handling.
 
 If a shelf and a stockpile overlap, the mod presents a short chooser naming
 the valid targets. It never guesses which filter you meant.
@@ -27,7 +39,7 @@ or be factionless (as stockpile zones are).
 
 - RimWorld 1.6
 - Harmony
-- Spine 1.2 or newer
+- Spine 1.0
 
 Spine is used only for its negotiated Harmony-patching capability. This mod has
 no settings page because there is no persistent behavior to configure.
@@ -54,3 +66,8 @@ Release packages include `LICENSE` alongside the runtime files so the license
 notice remains with every distributed copy.
 The Workshop preview is a real in-game capture of the item-to-storage targeting
 workflow, not a rendered mock-up.
+## Developer verification
+
+Live debug actions are isolated in
+`Developer/FilterByExample.TestFixture`. Build and load that folder only for harness
+verification; it is not part of the Filter by Example shipping package.

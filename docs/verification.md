@@ -25,8 +25,9 @@ dotnet run --project Tests/Mod.Tests.csproj -c Release
 compile-time API contract: RimWorld's `ThingDef` initialization requires Unity
 and therefore cannot execute correctly as a standalone .NET process.
 
-The production assembly includes a developer-mode debug action named
-**Filter by Example / Run exact-filter contract probe**. Inside RimWorld it
+The separately loadable `Developer/FilterByExample.TestFixture` includes a
+developer-mode debug action named **Filter by Example / Run exact-filter
+contract probe**. Inside RimWorld it
 executes the assembly-linked behavioral contract against actual `ThingDef`,
 `StorageSettings`, and `ThingFilter` objects, then emits
 `runtimeContract=pass` or `runtimeContract=fail` to the log.
@@ -95,3 +96,41 @@ Mod Filter by Example dependency (CoolNether123.Spine) needs to have <downloadUr
 No URL is invented in `About.xml`. This warning does not represent a load,
 patch, mutation, or save failure; it must be resolved when Spine has an
 authoritative distribution location.
+
+## 2026-08-02 drag and keybinding follow-up
+
+- The pure suite now passes 13/13 contracts, including native configurable
+  bindings, batch drag release, five-cell retry behavior, affected-cell
+  highlighting, outline retention, and suppression of the area-cell number.
+- The centralized RimWorld 1.6 build completed with zero warnings and zero
+  errors against the Spine 1.0 development line. That drag/keybinding runtime
+  assembly is 26,112 bytes with SHA-256
+  `9FB79C02578D4FFE0662D98926B04155599EC0AF04ACC4A05A77A5E414886032`.
+- `Test-RwtPackage` returned `RWT-BUILD-PACKAGE-VALID`.
+- In session `eight-new-e9df076b456e4aa3a99f4b36fb6475eb`, all eight
+  gameplay mods, Spine, SOS2, Vehicle Framework, Ideology, and Biotech reached
+  a generated colony with development mode enabled.
+- The ordinary selected-item gizmo path exposed Allow by example and Disallow
+  by example at the far right. Both commands use `Command.hotKey`, so any
+  player binding is drawn by RimWorld in the icon's upper-left corner.
+- The running assembly's exact-filter debug action reported
+  `runtimeContract=pass`; no exception was present in the session log.
+- The loaded custom draw style has one filled-rectangle style with
+  `drawOutline=true` and `drawArea=false`. RimWorld's own
+  `DesignationDragger` gates its area number on that flag, so the boundary and
+  affected-storage highlight remain without a cell-count overlay.
+
+## Current release candidate hardening (2026-08-02)
+
+The centralized-service candidate rebuild completed with zero warnings and
+zero errors against Spine SHA-256
+`3E857A09793BBFF839D0C18D197E480C9365B6384148F49F48669F068BBB9086`.
+The current `FilterByExample.dll` is 20,992 bytes, has assembly version
+1.0.0.0, and has SHA-256
+`37B756F22834920786099B411F7CB26055E04A02727CC197038B984A9EBFB3C4`.
+The focused suite passes 13 contracts and 49 assertions, and
+`Test-RwtPackage` returns `RWT-BUILD-PACKAGE-VALID`. The shipping package has
+one DLL and excludes `Developer/FilterByExample.TestFixture`; the fixture
+source and metadata remain available to developers. The runtime record above
+remains bound to its exact historical hash, so the parent release pass must
+record the final combined launch for this candidate.

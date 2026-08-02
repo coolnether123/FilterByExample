@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using FilterByExample.Domain;
+using static RimWorld.ModTestSupport.Test;
 
 namespace FilterByExample.Tests
 {
@@ -12,6 +15,7 @@ namespace FilterByExample.Tests
 
         private static int Main()
         {
+            Start("Filter by Example contracts");
             Run("allow exact definitions only", AllowExactDefinitionsOnly);
             Run("disallow exact definitions only", DisallowExactDefinitionsOnly);
             Run("dedupe definitions and shared settings", DedupeDefinitionsAndTargets);
@@ -20,8 +24,13 @@ namespace FilterByExample.Tests
             Run("batch independent storage targets", BatchIndependentTargets);
             Run("save reload preserves modded definitions", SaveReloadModdedDefinitions);
             Run("no-op plans do not notify", NoOpDoesNotNotify);
-            Console.WriteLine("PASS: 8 Filter by Example contracts");
-            return 0;
+            Run("commands have native configurable keybindings",
+                CommandsHaveNativeKeybindings);
+            Run("keybindings avoid unsafe defaults", KeybindingsStartUnbound);
+            Run("small empty drags stay active", SmallEmptyDragsStayActive);
+            Run("large empty drags end targeting", LargeEmptyDragsEndTargeting);
+            Run("drag designator previews and batches", DragDesignatorContracts);
+            return Finish();
         }
 
         private static void AllowExactDefinitionsOnly()
@@ -163,28 +172,119 @@ namespace FilterByExample.Tests
             Equal(0, target.NotificationCount, "no-op notified");
         }
 
-        private static void Run(string name, Action test)
+        private static void CommandsHaveNativeKeybindings()
         {
-            test();
-            Console.WriteLine("PASS: " + name);
+            string root = RepositoryRoot();
+            string source = File.ReadAllText(Path.Combine(
+                root,
+                "Source",
+                "Presentation",
+                "Designator_FilterByExample.cs"));
+            string factory = File.ReadAllText(Path.Combine(
+                root,
+                "Source",
+                "Presentation",
+                "ExampleSelectionCommands.cs"));
+            True(source.Contains(
+                    "hotKey = keyBinding",
+                    StringComparison.Ordinal) &&
+                factory.Contains(
+                    "FilterByExampleDefOf.FilterByExample_Allow",
+                    StringComparison.Ordinal) &&
+                factory.Contains(
+                    "FilterByExampleDefOf.FilterByExample_Disallow",
+                    StringComparison.Ordinal),
+                "both targeting commands must use RimWorld's native hotkey path");
         }
 
-        private static void Equal<T>(T expected, T actual, string message)
+        private static void KeybindingsStartUnbound()
         {
-            if (!EqualityComparer<T>.Default.Equals(expected, actual))
+            string root = RepositoryRoot();
+            var document = XDocument.Load(Path.Combine(
+                root,
+                "Defs",
+                "KeyBindings.xml"));
+            XElement[] definitions = document.Root?
+                .Elements("KeyBindingDef")
+                .ToArray() ?? Array.Empty<XElement>();
+            Equal(2, definitions.Length, "keybinding definition count");
+            foreach (XElement definition in definitions)
             {
-                throw new InvalidOperationException(
-                    message + ": expected " + expected + ", actual " + actual);
+                Equal(
+                    "None",
+                    definition.Element("defaultKeyCodeA")?.Value,
+                    "primary default");
+                Equal(
+                    "None",
+                    definition.Element("defaultKeyCodeB")?.Value,
+                    "secondary default");
             }
         }
 
-        private static void True(bool condition, string message)
+        private static void SmallEmptyDragsStayActive()
         {
-            if (!condition)
-            {
-                throw new InvalidOperationException(message);
-            }
+            True(EmptyDragRetryPolicy.KeepActive(1, 1), "single miss canceled");
+            True(EmptyDragRetryPolicy.KeepActive(5, 5), "five-cell span canceled");
         }
+
+        private static void LargeEmptyDragsEndTargeting()
+        {
+            True(!EmptyDragRetryPolicy.KeepActive(6, 1), "wide miss stayed active");
+            True(!EmptyDragRetryPolicy.KeepActive(1, 6), "tall miss stayed active");
+        }
+
+        private static void DragDesignatorContracts()
+        {
+            string root = RepositoryRoot();
+            string commands = File.ReadAllText(Path.Combine(
+                root,
+                "Source",
+                "Presentation",
+                "ExampleSelectionCommands.cs"));
+            string designator = File.ReadAllText(Path.Combine(
+                root,
+                "Source",
+                "Presentation",
+                "Designator_FilterByExample.cs"));
+            True(commands.Contains(
+                    "Designator_FilterByExample",
+                    StringComparison.Ordinal),
+                "commands do not enter the native designator path");
+            True(designator.Contains(
+                    "FilterByExampleDefOf.FilterByExample_AffectedStorageArea",
+                    StringComparison.Ordinal) &&
+                designator.Contains(
+                    "DesignateMultiCell",
+                    StringComparison.Ordinal) &&
+                designator.Contains(
+                    "DesignatorUtility.DragHighlightCellMat",
+                    StringComparison.Ordinal),
+                "drag outline, batch release, or target highlighting missing");
+
+            string drawStyles = File.ReadAllText(Path.Combine(
+                root,
+                "Defs",
+                "DrawStyles.xml"));
+            True(drawStyles.Contains(
+                    "<drawOutline>true</drawOutline>",
+                    StringComparison.Ordinal),
+                "drag outline was disabled");
+            True(drawStyles.Contains(
+                    "<drawArea>false</drawArea>",
+                    StringComparison.Ordinal),
+                "drag area cell count was not disabled");
+        }
+
+        private static string RepositoryRoot()
+        {
+            return Path.GetFullPath(Path.Combine(
+                AppContext.BaseDirectory,
+                "..",
+                "..",
+                "..",
+                ".."));
+        }
+
 
         private static void SetEqual(
             IEnumerable<string> expected,

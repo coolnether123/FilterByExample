@@ -3,6 +3,7 @@
   <name>Filter by Example</name>
   <author>CoolNether123</author>
   <packageId>CoolNether123.FilterByExample</packageId>
+  <modVersion>1.0.0</modVersion>
   <supportedVersions>
     <li>1.6</li>
   </supportedVersions>
@@ -23,5 +24,7 @@
   </loadAfter>
   <description>Select one or more real items, choose Allow or Disallow by example, then click a stockpile, shelf, or storage building.
 
-Filter by Example changes only those exact item definitions in the target's real storage filter. It supports linked shelves and modded item definitions without category-wide, quality, hit-point, stuff, ingredient, or priority changes.</description>
+Filter by Example changes only those exact item definitions in the target's real storage filter. It supports linked shelves and modded item definitions without category-wide, quality, hit-point, stuff, ingredient, or priority changes.
+
+Allow by example and Disallow by example each have a configurable entry in RimWorld's normal Controls menu.</description>
 </ModMetaData>

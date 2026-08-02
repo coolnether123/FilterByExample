@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle("Filter by Example")]
 [assembly: AssemblyDescription("Exact ThingDef storage filtering from selected examples")]
@@ -6,3 +7,4 @@ using System.Reflection;
 [assembly: AssemblyProduct("Filter by Example")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: InternalsVisibleTo("FilterByExample.TestFixture")]

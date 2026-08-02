@@ -28,6 +28,8 @@
              Link="FilterMutationResult.cs" />
     <Compile Include="..\Source\Domain\FilterByExampleService.cs"
              Link="FilterByExampleService.cs" />
+    <Compile Include="..\Source\Domain\ReferenceIdentityComparer.cs"
+             Link="ReferenceIdentityComparer.cs" />
     <Compile Include="..\Source\Runtime\StorageFilterTarget.cs"
              Link="StorageFilterTarget.cs" />
   </ItemGroup>

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace FilterByExample.Domain
 {
@@ -26,7 +25,7 @@ namespace FilterByExample.Domain
             {
                 for (int index = 0; index < definitions.Count; index++)
                 {
-                    if (NeedsChange(target, definitions[index], operation))
+                    if (CanApply(definitions[index], target, operation))
                     {
                         return true;
                     }
@@ -34,6 +33,26 @@ namespace FilterByExample.Domain
             }
 
             return false;
+        }
+
+        public bool CanApply(
+            TDefinition definition,
+            IExampleFilterTarget<TDefinition> target,
+            ExampleFilterOperation operation)
+        {
+            if (ReferenceEquals(definition, null) || target == null)
+            {
+                return false;
+            }
+
+            if (operation == ExampleFilterOperation.Allow &&
+                !target.CanAllow(definition))
+            {
+                return false;
+            }
+
+            bool allow = operation == ExampleFilterOperation.Allow;
+            return target.Allows(definition) != allow;
         }
 
         public FilterMutationResult Apply(
@@ -92,21 +111,6 @@ namespace FilterByExample.Domain
                 blockedDefinitions);
         }
 
-        private bool NeedsChange(
-            IExampleFilterTarget<TDefinition> target,
-            TDefinition definition,
-            ExampleFilterOperation operation)
-        {
-            if (operation == ExampleFilterOperation.Allow &&
-                !target.CanAllow(definition))
-            {
-                return false;
-            }
-
-            bool allow = operation == ExampleFilterOperation.Allow;
-            return target.Allows(definition) != allow;
-        }
-
         private List<TDefinition> UniqueDefinitions(
             IEnumerable<TDefinition> examples)
         {
@@ -150,21 +154,5 @@ namespace FilterByExample.Domain
             return result;
         }
 
-        private sealed class ReferenceIdentityComparer :
-            IEqualityComparer<object>
-        {
-            internal static readonly ReferenceIdentityComparer Instance =
-                new ReferenceIdentityComparer();
-
-            public new bool Equals(object left, object right)
-            {
-                return ReferenceEquals(left, right);
-            }
-
-            public int GetHashCode(object value)
-            {
-                return RuntimeHelpers.GetHashCode(value);
-            }
-        }
     }
 }

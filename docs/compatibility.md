@@ -28,7 +28,12 @@ service unchanged.
 
 ## Dependencies
 
-The mod requires Harmony and Spine 1.2+. Spine negotiates only
+The mod requires Harmony and Spine 1.0. Spine negotiates only
 `HarmonyPatching`; no optional Spine settings or save-data facilities are used.
 The Harmony patch touches only `Thing.GetGizmos` and appends commands without
 replacing vanilla gizmos.
+
+The two targeting commands use ordinary RimWorld `KeyBindingDef` entries and
+`Command_Target.hotKey`. They ship unbound, so the mod introduces no default
+collision. Player assignments use RimWorld's normal conflict handling and are
+active only while the corresponding item-selection gizmo is present.

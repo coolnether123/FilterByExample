@@ -2,10 +2,12 @@
 <LanguageData>
   <FBE_AllowCommand>Allow by example</FBE_AllowCommand>
   <FBE_DisallowCommand>Disallow by example</FBE_DisallowCommand>
-  <FBE_AllowDescription>Choose a storage target and allow the {0} selected item type(s). Only exact item definitions change.</FBE_AllowDescription>
-  <FBE_DisallowDescription>Choose a storage target and disallow the {0} selected item type(s). Only exact item definitions change.</FBE_DisallowDescription>
-  <FBE_NoValidTarget>Choose a player storage target whose filter can change.</FBE_NoValidTarget>
-  <FBE_NoChange>No item types needed changing in {0}.</FBE_NoChange>
-  <FBE_AllowedResult>Allowed {0} item type(s) in {1}.</FBE_AllowedResult>
-  <FBE_DisallowedResult>Disallowed {0} item type(s) in {1}.</FBE_DisallowedResult>
+  <FBE_AllowDescription>Click or drag over storage to allow the {0} selected item type(s). Highlighted storage will change.</FBE_AllowDescription>
+  <FBE_DisallowDescription>Click or drag over storage to disallow the {0} selected item type(s). Highlighted storage will change.</FBE_DisallowDescription>
+  <FBE_NoValidTarget>No storage filters in that area need changing.</FBE_NoValidTarget>
+  <FBE_NoChange>No item types needed changing.</FBE_NoChange>
+  <FBE_AllowedResult>Allowed {COUNT} item type(s) in {TARGET}.</FBE_AllowedResult>
+  <FBE_DisallowedResult>Disallowed {COUNT} item type(s) in {TARGET}.</FBE_DisallowedResult>
+  <FBE_AllowedBatchResult>Made {COUNT} allow change(s) across {TARGET} storage targets.</FBE_AllowedBatchResult>
+  <FBE_DisallowedBatchResult>Made {COUNT} disallow change(s) across {TARGET} storage targets.</FBE_DisallowedBatchResult>
 </LanguageData>

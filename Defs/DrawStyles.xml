@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <DrawStyleDef>
+    <defName>FilterByExample_AffectedStorageRectangle</defName>
+    <label>affected storage rectangle</label>
+    <drawStyleType>DrawStyle_FilledRectangle</drawStyleType>
+    <drawOutline>true</drawOutline>
+    <drawArea>false</drawArea>
+  </DrawStyleDef>
+
+  <DrawStyleCategoryDef>
+    <defName>FilterByExample_AffectedStorageArea</defName>
+    <styles>
+      <li>FilterByExample_AffectedStorageRectangle</li>
+    </styles>
+  </DrawStyleCategoryDef>
+</Defs>

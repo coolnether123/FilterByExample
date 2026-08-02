@@ -3,6 +3,29 @@
   "packageId": "CoolNether123.FilterByExample",
   "rimWorldVersion": "1.6",
   "profilerMode": "absent",
+  "currentCandidate": {
+    "date": "2026-08-02",
+    "sourceBaseCommit": "0c227329c96a095b29246973f1d4110ba71a5d14",
+    "sourceStateAtBuild": "working tree release candidate; commit pending",
+    "assemblyVersion": "1.0.0.0",
+    "modAssemblySizeBytes": 20992,
+    "modAssemblySha256": "37B756F22834920786099B411F7CB26055E04A02727CC197038B984A9EBFB3C4",
+    "spineSha256": "3E857A09793BBFF839D0C18D197E480C9365B6384148F49F48669F068BBB9086",
+    "buildWarnings": 0,
+    "buildErrors": 0,
+    "automatedTests": "13 contracts, 49 assertions passed",
+    "packageValidation": "RWT-BUILD-PACKAGE-VALID",
+    "shippingDllCount": 1,
+    "developerFixtureIncluded": false,
+    "releaseIncludePaths": [
+      "About",
+      "1.6/Assemblies/FilterByExample.dll",
+      "Defs",
+      "Languages",
+      "LICENSE"
+    ],
+    "runtimeEvidenceNotice": "The runtime record below remains exact evidence for its named historical assembly. A final combined launch is required for this centralized-service rebuild."
+  },
   "releasePackage": {
     "resultCode": "RWT-BUILD-RELEASE-PACKAGE-VALID",
     "includedPaths": [
