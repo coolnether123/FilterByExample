@@ -26,7 +26,7 @@ namespace FilterByExample.Tests
             Run("no-op plans do not notify", NoOpDoesNotNotify);
             Run("commands have native configurable keybindings",
                 CommandsHaveNativeKeybindings);
-            Run("keybindings avoid unsafe defaults", KeybindingsStartUnbound);
+            Run("keybindings use deliberate left-hand defaults", KeybindingsUseSafeDefaults);
             Run("small empty drags stay active", SmallEmptyDragsStayActive);
             Run("large empty drags end targeting", LargeEmptyDragsEndTargeting);
             Run("drag designator previews and batches", DragDesignatorContracts);
@@ -197,7 +197,7 @@ namespace FilterByExample.Tests
                 "both targeting commands must use RimWorld's native hotkey path");
         }
 
-        private static void KeybindingsStartUnbound()
+        private static void KeybindingsUseSafeDefaults()
         {
             string root = RepositoryRoot();
             var document = XDocument.Load(Path.Combine(
@@ -208,12 +208,22 @@ namespace FilterByExample.Tests
                 .Elements("KeyBindingDef")
                 .ToArray() ?? Array.Empty<XElement>();
             Equal(2, definitions.Length, "keybinding definition count");
+            Equal(
+                "Q",
+                definitions.Single(definition =>
+                    definition.Element("defName")?.Value ==
+                    "FilterByExample_Allow")
+                    .Element("defaultKeyCodeA")?.Value,
+                "allow primary default");
+            Equal(
+                "E",
+                definitions.Single(definition =>
+                    definition.Element("defName")?.Value ==
+                    "FilterByExample_Disallow")
+                    .Element("defaultKeyCodeA")?.Value,
+                "disallow primary default");
             foreach (XElement definition in definitions)
             {
-                Equal(
-                    "None",
-                    definition.Element("defaultKeyCodeA")?.Value,
-                    "primary default");
                 Equal(
                     "None",
                     definition.Element("defaultKeyCodeB")?.Value,

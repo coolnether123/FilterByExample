@@ -3,13 +3,13 @@
   <KeyBindingDef ParentName="SelectionSpecialKeyBinding">
     <defName>FilterByExample_Allow</defName>
     <label>Filter by Example: allow</label>
-    <defaultKeyCodeA>None</defaultKeyCodeA>
+    <defaultKeyCodeA>Q</defaultKeyCodeA>
     <defaultKeyCodeB>None</defaultKeyCodeB>
   </KeyBindingDef>
   <KeyBindingDef ParentName="SelectionSpecialKeyBinding">
     <defName>FilterByExample_Disallow</defName>
     <label>Filter by Example: disallow</label>
-    <defaultKeyCodeA>None</defaultKeyCodeA>
+    <defaultKeyCodeA>E</defaultKeyCodeA>
     <defaultKeyCodeB>None</defaultKeyCodeB>
   </KeyBindingDef>
 </Defs>
