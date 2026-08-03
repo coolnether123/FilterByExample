@@ -27,5 +27,5 @@
 
 Filter by Example changes only those exact item definitions in the target's real storage filter. It supports linked shelves and modded item definitions without category-wide, quality, hit-point, stuff, ingredient, or priority changes.
 
-Allow by example and Disallow by example each have a configurable entry in RimWorld's normal Controls menu.</description>
+Allow by example defaults to Q and Disallow by example defaults to E. Both remain configurable in RimWorld's normal Controls menu and show their assigned letter on the command.</description>
 </ModMetaData>

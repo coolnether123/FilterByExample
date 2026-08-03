@@ -17,10 +17,11 @@ the affected highlights are the confirmation. A small empty click or drag up
 to five cells wide and tall keeps the tool active so a near miss can be retried
 without choosing the command again.
 
-Both actions have their own entries in RimWorld's normal Controls menu. They
-start unbound because RimWorld already occupies every convenient nearby letter;
-assign whichever keys fit your layout. The selected bindings appear on the
-command gizmos and use RimWorld's ordinary hotkey handling.
+Both actions have their own entries in RimWorld's normal Controls menu.
+**Allow by example** defaults to **Q** and **Disallow by example** defaults to
+**E**, keeping both actions under the left hand. Their letters appear in the
+top-left of the command gizmos, and either binding can be changed through
+RimWorld's ordinary controls.
 
 If a shelf and a stockpile overlap, the mod presents a short chooser naming
 the valid targets. It never guesses which filter you meant.
@@ -43,6 +44,12 @@ or be factionless (as stockpile zones are).
 
 Spine is used only for its negotiated Harmony-patching capability. This mod has
 no settings page because there is no persistent behavior to configure.
+
+## Installation
+
+Install Harmony and Spine, copy Filter by Example into RimWorld's `Mods`
+directory, then enable Harmony, Spine, and Filter by Example in that order.
+No other gameplay mod in the suite is required.
 
 ## Compatibility
 

@@ -134,3 +134,10 @@ one DLL and excludes `Developer/FilterByExample.TestFixture`; the fixture
 source and metadata remain available to developers. The runtime record above
 remains bound to its exact historical hash, so the parent release pass must
 record the final combined launch for this candidate.
+## Final release-candidate gate — 2026-08-03
+
+Passed 13 contracts (49 assertions), clean build, and package checks. Live
+verification confirmed the Allow and Disallow commands, visible Q/E key labels,
+exact-definition behavior, and coexistence with the full eight-mod suite. The
+UI/content, performance, and Multiplayer save/reload runs produced no Filter by
+Example exception.
