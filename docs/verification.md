@@ -80,11 +80,14 @@ executes the assembly-linked behavioral contract against actual `ThingDef`,
 - Harmony inspection: one postfix owned by `CoolNether123.FilterByExample`, with
   zero prefixes, transpilers, or finalizers.
 - The added commands sort after the vanilla **Allow** command at the far-right
-  end of the gizmo row. `Engineering/screenshots/rightmost-gizmos.png` records
+  end of the gizmo row. `rightmost-gizmos.png` records
   the live ordering; vanilla command positions are unchanged.
-- Portable UI evidence is stored under `Engineering/screenshots`: selected
-  example commands, targeting mode, the disallow result, and the resulting
-  shelf filter. `Engineering` is excluded from the shipping allowlist.
+- Portable UI evidence — selected example commands, targeting mode, the
+  disallow result, and the resulting shelf filter — was captured under
+  `Engineering/screenshots`. Those files are development evidence and are now
+  archived outside this repository at
+  `Archives/mod-evidence-20260805/FilterByExample/Engineering/screenshots/`.
+  `Engineering` was excluded from the shipping allowlist either way.
 
 One distribution-metadata warning remains unresolved because Spine currently
 has no authoritative public distribution URL:
