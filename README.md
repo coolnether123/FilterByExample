@@ -12,9 +12,9 @@ storage-filter changes from items already on the map.
 
 While dragging, RimWorld draws the selection boundary and the mod highlights
 only storage filters that will actually change. Release to update every
-highlighted target once. It deliberately omits RimWorld's area-cell number;
-the affected highlights are the confirmation. A small empty click or drag up
-to five cells wide and tall keeps the tool active so a near miss can be retried
+highlighted target once. It deliberately omits RimWorld's area-cell number; the
+affected highlights are the confirmation. A small empty click or drag up to
+five cells wide and tall keeps the tool active so a near miss can be retried
 without choosing the command again.
 
 Both actions have their own entries in RimWorld's normal Controls menu.
@@ -23,12 +23,12 @@ Both actions have their own entries in RimWorld's normal Controls menu.
 top-left of the command gizmos, and either binding can be changed through
 RimWorld's ordinary controls.
 
-If a shelf and a stockpile overlap, the mod presents a short chooser naming
-the valid targets. It never guesses which filter you meant.
+If a shelf and a stockpile overlap, the mod presents a short chooser naming the
+valid targets. It never guesses which filter you meant.
 
 Only the selected items' exact `ThingDef` entries are changed. The operation
-does not alter categories, hit-point or quality ranges, special filters,
-stuff, ingredients, storage priority, or other unrelated allowances. Duplicate
+does not alter categories, hit-point or quality ranges, special filters, stuff,
+ingredients, storage priority, or other unrelated allowances. Duplicate
 selected item types and linked shelves sharing one settings object are applied
 once.
 
@@ -39,17 +39,20 @@ or be factionless (as stockpile zones are).
 ## Requirements
 
 - RimWorld 1.6
-- Harmony
-- Spine 1.0
+- [Harmony](https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077)
+- [Spine](https://github.com/coolnether123/Spine) — the shared runtime used by
+  CoolNether123 mods
 
 Spine is used only for its negotiated Harmony-patching capability. This mod has
 no settings page because there is no persistent behavior to configure.
 
 ## Installation
 
-Install Harmony and Spine, copy Filter by Example into RimWorld's `Mods`
-directory, then enable Harmony, Spine, and Filter by Example in that order.
-No other gameplay mod in the suite is required.
+Install Harmony and Spine, copy `FilterByExample` into RimWorld's `Mods`
+folder, then enable Harmony, Spine, and Filter by Example in that order.
+
+The mod stores no save data and is safe to add to or remove from an existing
+save.
 
 ## Compatibility
 
@@ -59,22 +62,24 @@ shelves, linked storage groups, storage buildings, and modded storage that
 preserves the vanilla contract. See [compatibility notes](docs/compatibility.md)
 for tested and investigated boundaries.
 
-## Development and verification
+## Documentation
 
 The implementation is separated into a pure mutation service, RimWorld storage
-adapters, target resolution, and presentation. See
-[architecture](docs/architecture.md), [API investigation](docs/research/rimworld-1.6-api.md),
-[duplicate research](docs/research/duplicate-check.md), and
-[verification](docs/verification.md).
+adapters, target resolution, and presentation.
 
-Licensed under the MIT License.
+- [Architecture](docs/architecture.md)
+- [RimWorld 1.6 API investigation](docs/research/rimworld-1.6-api.md)
+- [Duplicate research](docs/research/duplicate-check.md)
+- [Verification record](docs/verification.md)
 
-Release packages include `LICENSE` alongside the runtime files so the license
-notice remains with every distributed copy.
-The Workshop preview is a real in-game capture of the item-to-storage targeting
-workflow, not a rendered mock-up.
-## Developer verification
+## Developer fixture
 
-Live debug actions are isolated in
-`Developer/FilterByExample.TestFixture`. Build and load that folder only for harness
-verification; it is not part of the Filter by Example shipping package.
+Live debug actions are isolated in `Developer/FilterByExample.TestFixture`, a
+separately loadable developer mod. Build and load that folder only for harness
+verification; it is never part of the Filter by Example shipping package.
+
+## License
+
+Released under the [MIT License](LICENSE). Harmony and Spine are used under
+their own licenses. Release packages include `LICENSE` alongside the runtime
+files so the notice travels with every distributed copy.
