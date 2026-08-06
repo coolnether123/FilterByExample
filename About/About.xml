@@ -23,9 +23,13 @@
     <li>brrainz.harmony</li>
     <li>CoolNether123.Spine</li>
   </loadAfter>
-  <description>Select one or more real items, choose Allow or Disallow by example, then click a stockpile, shelf, or storage building.
+  <description>Allow or disallow exactly the items you picked, without hunting through a filter tree.
 
-Filter by Example changes only those exact item definitions in the target's real storage filter. It supports linked shelves and modded item definitions without category-wide, quality, hit-point, stuff, ingredient, or priority changes.
+- Select real items, choose Allow or Disallow by example, then click a stockpile or shelf
+- Only those exact item definitions change
+- No category-wide, quality, hit-point, or priority changes
+- Works with linked shelves and modded items
+- Q and E by default, rebindable
 
-Allow by example defaults to Q and Disallow by example defaults to E. Both remain configurable in RimWorld's normal Controls menu and show their assigned letter on the command.</description>
+Requires Harmony and Spine.</description>
 </ModMetaData>
