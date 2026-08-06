@@ -5,6 +5,10 @@ using Verse;
 
 namespace FilterByExample.Patches
 {
+    /// <summary>
+    /// Adds the feature at RimWorld's existing item-command extension point so
+    /// selection and command placement remain owned by the vanilla UI.
+    /// </summary>
     [HarmonyPatch(typeof(Thing), nameof(Thing.GetGizmos))]
     internal static class ThingGizmoPatch
     {

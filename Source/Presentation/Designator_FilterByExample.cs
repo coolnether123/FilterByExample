@@ -10,6 +10,10 @@ using Verse;
 
 namespace FilterByExample.Presentation
 {
+    /// <summary>
+    /// Adapts the filtering workflow to RimWorld's rectangle designator, sharing
+    /// one target-resolution path between drag previews and released mutations.
+    /// </summary>
     internal sealed class Designator_FilterByExample : Designator
     {
         private static readonly FilterByExampleService<ThingDef> Service =
@@ -109,6 +113,8 @@ namespace FilterByExample.Presentation
 
             if (cells.Count == 1 && targets.Count > 1)
             {
+                // Shelves and stockpile zones can overlap. A click cannot convey
+                // which settings object the player intended, so never guess.
                 OpenTargetChooser(targets);
                 return;
             }
@@ -182,6 +188,8 @@ namespace FilterByExample.Presentation
                 minimum == cachedMinimum &&
                 maximum == cachedMaximum)
             {
+                // RimWorld redraws the same drag repeatedly; bounds plus count
+                // identify its filled rectangle without rescanning every cell.
                 return;
             }
 

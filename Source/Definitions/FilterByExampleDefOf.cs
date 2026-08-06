@@ -4,6 +4,10 @@ using Verse;
 namespace FilterByExample.Definitions
 {
 #pragma warning disable CS0649
+    /// <summary>
+    /// Provides typed access to XML definitions so presentation code does not
+    /// depend on string-based lookups or duplicate RimWorld's Def lifecycle.
+    /// </summary>
     [DefOf]
     internal static class FilterByExampleDefOf
     {

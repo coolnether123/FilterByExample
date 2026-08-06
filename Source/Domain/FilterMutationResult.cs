@@ -1,5 +1,9 @@
 namespace FilterByExample.Domain
 {
+    /// <summary>
+    /// Summarizes a batch without exposing mutation internals, allowing the UI
+    /// to report blocked, unchanged, and successful operations accurately.
+    /// </summary>
     public readonly struct FilterMutationResult
     {
         public FilterMutationResult(

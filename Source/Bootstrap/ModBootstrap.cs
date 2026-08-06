@@ -5,6 +5,10 @@ using Verse;
 
 namespace FilterByExample.Bootstrap
 {
+    /// <summary>
+    /// Establishes the mod's Spine contract and installs its patches once at
+    /// startup, keeping integration concerns out of the filtering workflow.
+    /// </summary>
     public sealed class FilterByExampleMod : Mod
     {
         private static readonly IHarmonyPatchInstaller PatchInstaller =

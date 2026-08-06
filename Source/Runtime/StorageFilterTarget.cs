@@ -4,6 +4,10 @@ using Verse;
 
 namespace FilterByExample.Runtime
 {
+    /// <summary>
+    /// Adapts one real StorageSettings instance to the domain mutation boundary
+    /// while retaining RimWorld's parent-filter restrictions for additions.
+    /// </summary>
     internal sealed class StorageFilterTarget :
         IExampleFilterTarget<ThingDef>
     {

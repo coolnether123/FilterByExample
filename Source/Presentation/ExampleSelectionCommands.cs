@@ -6,6 +6,10 @@ using Verse;
 
 namespace FilterByExample.Presentation
 {
+    /// <summary>
+    /// Converts the current item selection into one pair of designators, keeping
+    /// selection ownership and validation out of the Harmony patch.
+    /// </summary>
     internal static class ExampleSelectionCommands
     {
         internal static IEnumerable<Gizmo> For(Thing source)
@@ -71,6 +75,8 @@ namespace FilterByExample.Presentation
 
                 if (!sourceIsFirst)
                 {
+                    // Thing.GetGizmos runs for every selected item. Only the first
+                    // eligible selection contributes commands, avoiding duplicates.
                     if (!ReferenceEquals(thing, source))
                     {
                         return new List<ThingDef>();

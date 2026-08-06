@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace FilterByExample.Domain
 {
+    /// <summary>
+    /// Applies exact-definition filter changes through a game-neutral boundary,
+    /// keeping mutation rules deterministic and independently testable.
+    /// </summary>
     public sealed class FilterByExampleService<TDefinition>
     {
         private readonly IEqualityComparer<TDefinition> definitionComparer;
@@ -48,6 +52,8 @@ namespace FilterByExample.Domain
             if (operation == ExampleFilterOperation.Allow &&
                 !target.CanAllow(definition))
             {
+                // RimWorld's parent and fixed filters constrain additions, but
+                // must not prevent a user from narrowing a child filter.
                 return false;
             }
 
@@ -82,6 +88,8 @@ namespace FilterByExample.Domain
                     if (operation == ExampleFilterOperation.Allow &&
                         !target.CanAllow(definition))
                     {
+                        // Disallow remains valid even when a parent filter would
+                        // reject adding the same definition.
                         blockedDefinitions++;
                         continue;
                     }
@@ -145,6 +153,8 @@ namespace FilterByExample.Domain
             foreach (IExampleFilterTarget<TDefinition> target in targets)
             {
                 object identity = target?.Identity;
+                // Linked storage may expose several adapters for one settings
+                // object; mutating that shared object more than once is noisy.
                 if (identity != null && seen.Add(identity))
                 {
                     result.Add(target);

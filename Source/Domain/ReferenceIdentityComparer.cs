@@ -3,6 +3,10 @@ using System.Runtime.CompilerServices;
 
 namespace FilterByExample.Domain
 {
+    /// <summary>
+    /// Preserves object identity when deduplicating shared RimWorld settings,
+    /// whose value equality would not represent a distinct mutation target.
+    /// </summary>
     internal sealed class ReferenceIdentityComparer :
         IEqualityComparer<object>
     {

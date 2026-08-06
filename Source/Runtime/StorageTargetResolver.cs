@@ -7,6 +7,10 @@ using Verse;
 
 namespace FilterByExample.Runtime
 {
+    /// <summary>
+    /// Discovers mutable storage through RimWorld's interface contract so zones,
+    /// buildings, linked groups, and compatible modded storage use one path.
+    /// </summary>
     internal static class StorageTargetResolver
     {
         internal static List<StorageFilterTarget> Resolve(
@@ -85,6 +89,8 @@ namespace FilterByExample.Runtime
                 }
 
                 StorageSettings settings = parent.GetStoreSettings();
+                // Linked group members return the same settings instance; the
+                // shared filter must appear as one target even across adapters.
                 if (settings?.filter == null || !seenSettings.Add(settings))
                 {
                     return;
@@ -97,6 +103,8 @@ namespace FilterByExample.Runtime
             }
             catch (Exception exception)
             {
+                // Resolution also runs during hover previews. Log once per
+                // incompatible implementation to avoid frame-by-frame spam.
                 Log.WarningOnce(
                     "[Filter by Example] Ignored incompatible storage target " +
                     (label ?? "<unnamed>") + ": " + exception.Message,
