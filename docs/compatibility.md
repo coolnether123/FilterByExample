@@ -28,7 +28,7 @@ service unchanged.
 
 ## Dependencies
 
-The mod requires Harmony and Spine 1.0. Spine negotiates only
+The mod requires Harmony and SpineLib 1.0. SpineLib negotiates only
 `HarmonyPatching`; no optional Spine settings or save-data facilities are used.
 The Harmony patch touches only `Thing.GetGizmos` and appends commands without
 replacing vanilla gizmos.
