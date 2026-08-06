@@ -40,16 +40,16 @@ or be factionless (as stockpile zones are).
 
 - RimWorld 1.6
 - [Harmony](https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077)
-- [Spine](https://github.com/coolnether123/Spine) — the shared runtime used by
+- [SpineLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3778463813) — the shared runtime used by
   CoolNether123 mods
 
-Spine is used only for its negotiated Harmony-patching capability. This mod has
+SpineLib is used only for its negotiated Harmony-patching capability. This mod has
 no settings page because there is no persistent behavior to configure.
 
 ## Installation
 
-Install Harmony and Spine, copy `FilterByExample` into RimWorld's `Mods`
-folder, then enable Harmony, Spine, and Filter by Example in that order.
+Install Harmony and SpineLib, copy `FilterByExample` into RimWorld's `Mods`
+folder, then enable Harmony, SpineLib, and Filter by Example in that order.
 
 The mod stores no save data and is safe to add to or remove from an existing
 save.
@@ -80,6 +80,6 @@ verification; it is never part of the Filter by Example shipping package.
 
 ## License
 
-Released under the [MIT License](LICENSE). Harmony and Spine are used under
+Released under the [MIT License](LICENSE). Harmony and SpineLib are used under
 their own licenses. Release packages include `LICENSE` alongside the runtime
 files so the notice travels with every distributed copy.
