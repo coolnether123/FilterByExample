@@ -7,7 +7,7 @@ if ([string]::IsNullOrWhiteSpace($toolingRoot) -or [string]::IsNullOrWhiteSpace(
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $repository 'Tools\CascadeManifest.json') | ConvertFrom-Json
 $project = (Get-ChildItem -LiteralPath (Join-Path $repository 'Source') -Filter '*.csproj' -File | Select-Object -First 1).FullName
 $resultPath = Join-Path $outputRoot 'build-result.json'
-& powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File (Join-Path ([System.IO.Path]::GetFullPath($toolingRoot)) 'tools\Invoke-RimWorldBuild.ps1') -Project $project -Configuration $Configuration -Version $Configuration -OutputRoot $outputRoot -Engine MSBuild -Dependency @('harmony', 'spine') -ResultPath $resultPath | Out-Null
+& powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File (Join-Path ([System.IO.Path]::GetFullPath($toolingRoot)) 'tools\Invoke-RimWorldBuild.ps1') -Project $project -Configuration $Configuration -Version $Configuration -OutputRoot $outputRoot -Engine MSBuild -Dependency 'harmony,spine' -ResultPath $resultPath | Out-Null
 if (-not (Test-Path -LiteralPath $resultPath -PathType Leaf)) { throw "No build result was returned for $Configuration." }
 $result = Get-Content -Raw -LiteralPath $resultPath | ConvertFrom-Json
 if (-not [bool]$result.Succeeded) { throw "RimWorld $Configuration build failed with exit code $($result.ExitCode)." }
