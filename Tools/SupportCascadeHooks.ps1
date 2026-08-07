@@ -17,7 +17,14 @@ $aboutXml = @"
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData><name>$($profile.Name)</name><author>CoolNether123</author><packageId>$($profile.Package)</packageId><modVersion>1.0.0</modVersion><supportedVersions><li>$Version</li></supportedVersions><modDependencies>$dependencyXml</modDependencies><loadAfter>$loadAfterXml</loadAfter><description>$($profile.Description) RimWorld $Version support build.</description></ModMetaData>
 "@
-$loadFoldersXml = "<?xml version=`"1.0`" encoding=`"utf-8`"?><loadFolders><v$Version><li>/</li></v$Version></loadFolders>"
+$loadFoldersXml = @"
+<?xml version="1.0" encoding="utf-8"?>
+<loadFolders>
+  <v$Version>
+    <li>/</li>
+  </v$Version>
+</loadFolders>
+"@
 if ($Phase -eq 'after-merge') {
   [System.IO.File]::WriteAllText((Join-Path $repository 'About\About.xml'), $aboutXml); [System.IO.File]::WriteAllText((Join-Path $repository 'LoadFolders.xml'), $loadFoldersXml)
   & git -C $repository add -- About/About.xml LoadFolders.xml; if ($LASTEXITCODE -ne 0) { throw 'Could not stage support metadata.' }
