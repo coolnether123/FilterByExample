@@ -5,8 +5,23 @@
     <AssemblyName>FilterByExample</AssemblyName>
     <RootNamespace>FilterByExample</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <OutputPath>..\1.6\Assemblies\</OutputPath>
+    <Configurations>1.6;1.5;1.4;1.3;1.2;1.1</Configurations>
+    <DisableImplicitConfigurationDefines>true</DisableImplicitConfigurationDefines>
+    <OutputPath>..\$(Configuration)\Assemblies\</OutputPath>
     <RwtUseHarmony>true</RwtUseHarmony>
     <RwtUseSpine>true</RwtUseSpine>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' != '1.6'">
+    <DefineConstants>FILTER_BY_EXAMPLE_LEGACY_NO_DRAW_STYLE;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == '1.4' Or '$(Configuration)' == '1.5'">
+    <DefineConstants>FILTER_BY_EXAMPLE_LEGACY_NO_DRAW_STYLE;FILTER_BY_EXAMPLE_HAS_ORDER;FILTER_BY_EXAMPLE_HAS_STORAGE_GROUP_MEMBER;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == '1.5'">
+    <DefineConstants>FILTER_BY_EXAMPLE_LEGACY_NO_DRAW_STYLE;FILTER_BY_EXAMPLE_HAS_ORDER;FILTER_BY_EXAMPLE_HAS_STORAGE_GROUP_MEMBER;FILTER_BY_EXAMPLE_HAS_RENAMABLE_LABEL;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == '1.1' Or '$(Configuration)' == '1.2' Or '$(Configuration)' == '1.3'">
+    <DefineConstants>FILTER_BY_EXAMPLE_LEGACY_NO_DRAW_STYLE;FILTER_BY_EXAMPLE_LEGACY_SOUND;FILTER_BY_EXAMPLE_LEGACY_LOG;TRACE</DefineConstants>
   </PropertyGroup>
 </Project>

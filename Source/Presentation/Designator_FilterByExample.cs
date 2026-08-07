@@ -31,8 +31,10 @@ namespace FilterByExample.Presentation
 
         protected override bool DoTooltip => true;
 
+#if !FILTER_BY_EXAMPLE_LEGACY_NO_DRAW_STYLE
         public override DrawStyleCategoryDef DrawStyleCategory =>
             FilterByExampleDefOf.FilterByExample_AffectedStorageArea;
+#endif
 
         public Designator_FilterByExample(
             IReadOnlyList<ThingDef> definitions,
@@ -46,13 +48,19 @@ namespace FilterByExample.Presentation
             this.operation = operation;
             defaultLabel = label;
             defaultDesc = description;
-            icon = iconTexture;
+            icon = (Texture2D)iconTexture;
             hotKey = keyBinding;
+#if FILTER_BY_EXAMPLE_HAS_ORDER
             Order = float.MaxValue;
+#endif
             useMouseIcon = true;
             soundDragSustain = SoundDefOf.Designate_DragStandard;
             soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
+#if FILTER_BY_EXAMPLE_LEGACY_SOUND
+            soundSucceeded = SoundDefOf.Designate_DragStandard;
+#else
             soundSucceeded = SoundDefOf.Designate_ZoneAdd_Stockpile;
+#endif
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 cell)

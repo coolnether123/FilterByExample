@@ -21,8 +21,10 @@ namespace FilterByExample.Definitions
 
         public static KeyBindingDef FilterByExample_Disallow;
 
+#if !FILTER_BY_EXAMPLE_LEGACY_NO_DRAW_STYLE
         public static DrawStyleCategoryDef
             FilterByExample_AffectedStorageArea;
+#endif
     }
 #pragma warning restore CS0649
 }

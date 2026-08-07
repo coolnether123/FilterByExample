@@ -105,20 +105,37 @@ namespace FilterByExample.Runtime
             {
                 // Resolution also runs during hover previews. Log once per
                 // incompatible implementation to avoid frame-by-frame spam.
+#if FILTER_BY_EXAMPLE_LEGACY_LOG
+                Log.Warning(
+#else
                 Log.WarningOnce(
+#endif
                     "[Filter by Example] Ignored incompatible storage target " +
-                    (label ?? "<unnamed>") + ": " + exception.Message,
+                    (label ?? "<unnamed>") + ": " + exception.Message
+#if !FILTER_BY_EXAMPLE_LEGACY_LOG
+                    ,
                     (parent.GetType().FullName ?? string.Empty).GetHashCode());
+#else
+                    );
+#endif
             }
         }
 
         private static string LabelFor(Thing thing)
         {
+#if FILTER_BY_EXAMPLE_HAS_STORAGE_GROUP_MEMBER
             if (thing is IStorageGroupMember member && member.Group != null)
             {
+#if FILTER_BY_EXAMPLE_HAS_RENAMABLE_LABEL
                 return member.Group.RenamableLabel.CapitalizeFirst() +
+#else
+                return thing.LabelShortCap;
+#endif
+#if FILTER_BY_EXAMPLE_HAS_RENAMABLE_LABEL
                     " (" + thing.LabelShortCap + ")";
+#endif
             }
+#endif
 
             return thing.LabelShortCap;
         }
