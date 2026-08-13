@@ -8,7 +8,13 @@ deduplicates the selected items' `ThingDef` values. RimWorld's own filled-
 rectangle designator owns click capture, drag boundaries, and release. The mod
 resolves storage only inside that boundary, highlights cells containing filters
 that will change, deduplicates shared settings, and applies the release as one
-batch. A one-cell overlap still opens a short `FloatMenu` rather than guessing.
+batch. A successful single-cell release selects the resolved storage owner,
+opens the Inspect tab, and retains a presentation-only highlight state keyed to
+the exact target `ThingFilter`; a Harmony prefix on
+`Listing_TreeThingFilter.DoThingDef` paints every selected example definition's
+row before vanilla labels and checkboxes draw. A one-cell overlap still opens a
+short `FloatMenu` rather than guessing, and the chosen target follows the same
+selection/highlight path.
 
 An empty selection no larger than five by five cells keeps the selected
 designator active for an immediate retry. A successful operation and a larger
@@ -22,8 +28,15 @@ a key that already belongs to vanilla.
 `StorageTargetResolver` locates zones, things, and thing comps implementing
 `IStoreSettingsParent`. It resolves their actual `StorageSettings`, drops
 duplicates by settings-object identity, and constructs `StorageFilterTarget`
-adapters. Linked storage-group members therefore resolve to their shared group
-settings instead of receiving per-building copies.
+adapters while retaining the selectable Thing/Zone owner. Linked storage-group
+members therefore resolve to their shared group settings instead of receiving
+per-building copies.
+
+`HighlightState` and `HighlightDrawer` are presentation-only. The state stores
+the exact target filter, operation, and deduplicated selected definitions; the
+row patch only paints matching rows and never changes filter data. The row fill
+uses Better Work Tab Dev's restrained translucent teal selection color so a
+single item and a multi-item example selection read as one consistent action.
 
 `FilterByExampleService<TDefinition>` is the single mutation service. It is
 independent of RimWorld and receives only definition values plus
@@ -58,12 +71,14 @@ normal immediate storage refresh and save persistence.
 
 The production one-caller helpers are `ModBootstrap.InstallPatches`,
 `ThingGizmoPatch.AppendCommands`, `ExampleSelectionCommands.SelectedDefinitions`,
-and `EmptyDragRetryPolicy.KeepActive`.
+`EmptyDragRetryPolicy.KeepActive`, `HighlightState.Set`,
+`HighlightState.Matches`, and `HighlightDrawer.DrawHighlight`.
 They isolate, respectively, idempotent bootstrap, lazy enumerable composition,
-selection ownership, and the tested retry boundary.
-`EmptyDragRetryPolicy` currently has one production caller; keeping it internal
-is recommended because it creates a game-independent test seam for the exact
-five-cell behavior. Promoting any of these helpers to a public service would
-expose implementation detail. If a second presentation surface is added,
-selection resolution should then move behind a presentation-facing interface
+selection ownership, the tested retry boundary, highlight-state ownership,
+target matching, and row drawing.
+These helpers currently have one production caller where noted; keeping them
+internal is recommended because each creates a focused seam at a game/UI
+boundary. Promoting any of these helpers to a public service would expose
+implementation detail. If a second presentation surface is added, selection or
+highlight resolution should then move behind a presentation-facing interface
 instead of being copied.

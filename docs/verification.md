@@ -38,6 +38,9 @@ executes the assembly-linked behavioral contract against actual `ThingDef`,
 | --- | --- |
 | One selected item -> stockpile | Only that exact item definition changes |
 | Several selected item types -> shelf | Every distinct selected definition changes once |
+| Single-click target | Storage remains selected, Inspect opens, and the exact item row is highlighted |
+| Several selected item types -> single target | Every selected definition row is highlighted in the storage filter |
+| Drag across several targets | The batch applies once per shared settings identity; no arbitrary target is selected |
 | Repeated stacks of one type | One definition mutation |
 | Linked shelf member | Shared group filter changes and all members refresh |
 | Shelf overlapping stockpile | Short chooser identifies both actionable targets |
@@ -137,6 +140,26 @@ one DLL and excludes `Developer/FilterByExample.TestFixture`; the fixture
 source and metadata remain available to developers. The runtime record above
 remains bound to its exact historical hash, so the parent release pass must
 record the final combined launch for this candidate.
+
+## 2026-08-10 selection and background-safe UI smoke
+
+- The single-target designator path now clears the selected example items before
+  selecting the storage owner. A successful single click therefore leaves the
+  storage target selected and opens the Inspect tab while preserving the exact
+  selected-definition highlight set.
+- The developer fixture's `Run background-safe single-target highlight UI
+  smoke` action passed with `selectedStorage=true`, `inspectOpen=true`, both
+  selected definitions highlighted, and both definitions disallowed.
+- The fixture's `Run background-safe drag batch UI smoke` action passed with both
+  storage filters changed, the designator deselected, and both example items
+  still selected. These checks used the in-game designator callbacks and did not
+  move the OS cursor or take desktop focus.
+- The pure suite passed 13 contracts and 49 assertions. The centralized 1.6
+  Release build passed with zero warnings and zero errors, and the staged
+  package returned `RWT-BUILD-PACKAGE-VALID`.
+- Native pointer and semantic-gizmo input remains opt-in until the harness
+  implements its background-safe input backend. See the harness TODO before
+  attempting real pointer verification.
 ## Final release-candidate gate — 2026-08-03
 
 Passed 13 contracts (49 assertions), clean build, and package checks. Live

@@ -18,15 +18,31 @@ namespace FilterByExample.Runtime
             StorageSettings settings,
             StorageSettings parentSettings,
             string label)
+            : this(settings, parentSettings, label, null)
+        {
+        }
+
+        internal StorageFilterTarget(
+            StorageSettings settings,
+            StorageSettings parentSettings,
+            string label,
+            ISelectable selectableOwner)
         {
             this.settings = settings;
             this.parentSettings = parentSettings;
+            this.selectableOwner = selectableOwner;
             Label = label ?? string.Empty;
         }
+
+        private readonly ISelectable selectableOwner;
 
         public object Identity => settings;
 
         public string Label { get; }
+
+        public ThingFilter Filter => settings.filter;
+
+        public ISelectable SelectableOwner => selectableOwner;
 
         public bool Allows(ThingDef definition)
         {

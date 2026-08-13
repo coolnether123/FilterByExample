@@ -17,6 +17,12 @@ affected highlights are the confirmation. A small empty click or drag up to
 five cells wide and tall keeps the tool active so a near miss can be retried
 without choosing the command again.
 
+After a successful single-target click, the storage remains selected and its
+Inspect tab opens. Every selected example item is highlighted in the storage
+filter using the same translucent teal row treatment as Better Work Tab's
+selection highlights. Dragging across multiple storages keeps the batch action
+and does not replace it with an arbitrary single storage selection.
+
 Both actions have their own entries in RimWorld's normal Controls menu.
 **Allow by example** defaults to **Q** and **Disallow by example** defaults to
 **E**, keeping both actions under the left hand. Their letters appear in the

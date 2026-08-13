@@ -39,6 +39,7 @@ namespace FilterByExample.Runtime
                 AddParent(
                     thing as IStoreSettingsParent,
                     LabelFor(thing),
+                    thing,
                     targets,
                     seenSettings);
 
@@ -52,6 +53,7 @@ namespace FilterByExample.Runtime
                         AddParent(
                             comps[compIndex] as IStoreSettingsParent,
                             LabelFor(thing),
+                            thing,
                             targets,
                             seenSettings);
                     }
@@ -62,6 +64,7 @@ namespace FilterByExample.Runtime
             AddParent(
                 zone as IStoreSettingsParent,
                 zone?.label,
+                zone,
                 targets,
                 seenSettings);
 
@@ -73,6 +76,7 @@ namespace FilterByExample.Runtime
         private static void AddParent(
             IStoreSettingsParent parent,
             string label,
+            ISelectable selectableOwner,
             ICollection<StorageFilterTarget> targets,
             ISet<StorageSettings> seenSettings)
         {
@@ -99,7 +103,8 @@ namespace FilterByExample.Runtime
                 targets.Add(new StorageFilterTarget(
                     settings,
                     parent.GetParentStoreSettings(),
-                    label));
+                    label,
+                    selectableOwner));
             }
             catch (Exception exception)
             {

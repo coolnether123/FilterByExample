@@ -119,7 +119,9 @@ namespace FilterByExample.Presentation
                 return;
             }
 
-            ApplyTargets(targets);
+            ApplyTargets(
+                targets,
+                selectSingleTarget: cells.Count == 1);
         }
 
         private void OpenTargetChooser(
@@ -131,7 +133,9 @@ namespace FilterByExample.Presentation
                 StorageFilterTarget target = targets[index];
                 options.Add(new FloatMenuOption(
                     target.Label,
-                    () => ApplyTargets(new[] { target })));
+                    () => ApplyTargets(
+                        new[] { target },
+                        selectSingleTarget: true)));
             }
 
             Find.DesignatorManager.Deselect();
@@ -139,7 +143,8 @@ namespace FilterByExample.Presentation
         }
 
         private void ApplyTargets(
-            IReadOnlyList<StorageFilterTarget> targets)
+            IReadOnlyList<StorageFilterTarget> targets,
+            bool selectSingleTarget)
         {
             FilterMutationResult result = Service.Apply(
                 definitions,
@@ -178,6 +183,28 @@ namespace FilterByExample.Presentation
                 MessageTypeDefOf.TaskCompletion,
                 historical: false);
             Finalize(somethingSucceeded: true);
+            if (selectSingleTarget && targets.Count == 1)
+            {
+                StorageFilterTarget target = targets[0];
+                HighlightState.Set(
+                    target.Filter,
+                    operation,
+                    definitions);
+                if (target.SelectableOwner != null)
+                {
+                    // The example item(s) remain selected while the gizmo is
+                    // active. Replace that selection so a successful single
+                    // click leaves exactly the storage target selected.
+                    Find.Selector.ClearSelection();
+                    Find.Selector.Select(
+                        target.SelectableOwner,
+                        playSound: false);
+                    Find.MainTabsRoot.SetCurrentTab(
+                        MainButtonDefOf.Inspect,
+                        playSound: false);
+                }
+            }
+
             Find.DesignatorManager.Deselect();
         }
 
