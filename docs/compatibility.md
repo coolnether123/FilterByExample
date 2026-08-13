@@ -34,6 +34,8 @@ The Harmony patch touches only `Thing.GetGizmos` and appends commands without
 replacing vanilla gizmos.
 
 The two targeting commands use ordinary RimWorld `KeyBindingDef` entries and
-`Command_Target.hotKey`. They ship unbound, so the mod introduces no default
-collision. Player assignments use RimWorld's normal conflict handling and are
-active only while the corresponding item-selection gizmo is present.
+`Command_Target.hotKey`. Their declared defaults are `Q` (allow) and `E`
+(disallow), so those defaults can appear in RimWorld's normal key-binding
+conflict list with other commands. Player assignments use RimWorld's normal
+conflict handling and are active only while the corresponding item-selection
+gizmo is present; the mod does not use global key polling.
