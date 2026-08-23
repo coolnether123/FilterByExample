@@ -1,7 +1,7 @@
 # Filter by Example
 
-Filter by Example is a RimWorld 1.6 quality-of-life mod for making precise
-storage-filter changes from items already on the map.
+Filter by Example lets you update RimWorld 1.6 storage filters from items
+already on the map.
 
 ## Use
 
@@ -46,11 +46,11 @@ or be factionless (as stockpile zones are).
 
 - RimWorld 1.6
 - [Harmony](https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077)
-- [SpineLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3778463813) — the shared runtime used by
-  CoolNether123 mods
+- [SpineLib](https://steamcommunity.com/sharedfiles/filedetails/?id=3778463813),
+  the shared runtime for CoolNether123 mods
 
-SpineLib is used only for its negotiated Harmony-patching capability. This mod has
-no settings page because there is no persistent behavior to configure.
+The mod uses SpineLib only to install its Harmony patches. The mod has no
+settings page because there is no persistent behavior to configure.
 
 ## Installation
 

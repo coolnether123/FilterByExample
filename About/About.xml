@@ -30,7 +30,7 @@
 - Only those exact item definitions change
 - No category-wide, quality, hit-point, or priority changes
 - Works with linked shelves and modded items
-- Q and E by default, rebindable
+- Defaults to Q and E; both keys are rebindable
 
 Requires Harmony and SpineLib.</description>
 </ModMetaData>

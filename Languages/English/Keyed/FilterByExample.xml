@@ -5,9 +5,9 @@
   <FBE_AllowDescription>Click or drag over storage to allow the {0} selected item type(s). Highlighted storage will change.</FBE_AllowDescription>
   <FBE_DisallowDescription>Click or drag over storage to disallow the {0} selected item type(s). Highlighted storage will change.</FBE_DisallowDescription>
   <FBE_NoValidTarget>No storage filters in that area need changing.</FBE_NoValidTarget>
-  <FBE_NoChange>No item types needed changing.</FBE_NoChange>
+  <FBE_NoChange>No item types needed to change.</FBE_NoChange>
   <FBE_AllowedResult>Allowed {COUNT} item type(s) in {TARGET}.</FBE_AllowedResult>
   <FBE_DisallowedResult>Disallowed {COUNT} item type(s) in {TARGET}.</FBE_DisallowedResult>
-  <FBE_AllowedBatchResult>Made {COUNT} allow change(s) across {TARGET} storage targets.</FBE_AllowedBatchResult>
-  <FBE_DisallowedBatchResult>Made {COUNT} disallow change(s) across {TARGET} storage targets.</FBE_DisallowedBatchResult>
+  <FBE_AllowedBatchResult>Applied {COUNT} allow change(s) to {TARGET} storage targets.</FBE_AllowedBatchResult>
+  <FBE_DisallowedBatchResult>Applied {COUNT} disallow change(s) to {TARGET} storage targets.</FBE_DisallowedBatchResult>
 </LanguageData>
