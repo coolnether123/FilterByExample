@@ -17,4 +17,4 @@ Keep every mod gizmo at the far right.
 
 Package metadata, `Tools\CascadeManifest.json`, project files, and the complete
 `Tests` directory define support and verification. Follow the shared
-build/runtime workflow in `A:\Dev\RimWorld\AGENTS.md`.
+build/runtime workflow in `H:\Dev\RimWorld\AGENTS.md`.
